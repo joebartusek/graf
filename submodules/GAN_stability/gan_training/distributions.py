@@ -1,9 +1,11 @@
 import torch
 from torch import distributions
+import non_parametric_dist
 
 
-def get_zdist(dist_name, dim, device=None):
+def get_zdist(dist_name, dim, bins=None, width=None, device=None):
     # Get distribution
+    # just needs 'sample' method
     if dist_name == 'uniform':
         low = -torch.ones(dim, device=device)
         high = torch.ones(dim, device=device)
@@ -12,6 +14,8 @@ def get_zdist(dist_name, dim, device=None):
         mu = torch.zeros(dim, device=device)
         scale = torch.ones(dim, device=device)
         zdist = distributions.Normal(mu, scale)
+    elif dist_name == 'non_parametric':
+        zdist = non_parametric_dist.ZDist(dim, bins, width, device=device)
     else:
         raise NotImplementedError
 
