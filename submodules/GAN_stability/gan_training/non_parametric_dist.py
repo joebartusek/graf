@@ -3,6 +3,8 @@ import torch
 import numpy as np
 import scipy.io as sio
 
+import math
+
 # non-parametric sampling distribution from "Non-parametric priors for GANs"
 # by Singh et al. 
 class ZDist:
@@ -19,9 +21,14 @@ class ZDist:
 
     def sample(self, dim=None):
         if dim is not None: self.dim = dim
-        
-        idx = self.pdf.multinomial(num_samples=dim, replacement=True)
-        z = self.points[idx] + torch.rand(*dim) * self.epsilon
+
+        if type(dim) is int:
+            num_samples = dim
+        if type(dim) is tuple:
+            num_samples = math.prod(dim)
+        z = self.points[self.pdf.multinomial(num_samples=num_samples, replacement=True)]
+        z += torch.rand(num_samples) * self.epsilon
+        z = z.reshape(dim)
         z = z.type(torch.float32)
         z = z.to(self.device)
 
