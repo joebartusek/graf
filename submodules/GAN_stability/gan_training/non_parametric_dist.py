@@ -27,7 +27,7 @@ class ZDist:
         if type(dim) is tuple:
             num_samples = math.prod(dim)
         z = self.points[self.pdf.multinomial(num_samples=num_samples, replacement=True)]
-        z += torch.rand(num_samples) * self.epsilon
+        z += torch.rand(num_samples).to(self.device) * self.epsilon
         z = z.reshape(dim)
         z = z.type(torch.float32)
         z = z.to(self.device)
