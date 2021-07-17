@@ -1,6 +1,6 @@
 import torch
 from torch import distributions
-from gan_training import non_parametric_dist
+from GAN_stability.gan_training import non_parametric_dist
 
 
 def get_zdist(dist_name, dim, bins=None, width=None, device=None):
