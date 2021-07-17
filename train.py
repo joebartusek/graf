@@ -130,8 +130,10 @@ if __name__ == '__main__':
     # Distributions
     ydist = get_ydist(1, device=device)         # Dummy to keep GAN training structure in tact
     y = torch.zeros(batch_size)                 # Dummy to keep GAN training structure in tact
-    zdist = get_zdist(config['z_dist']['type'], config['z_dist']['dim'],
-                      device=device)
+    zdist = get_zdist(config['z_dist']['type'], config['z_dist']['dim'], # needs 'sample' method
+                      config.get('non_parametric_dist_bins'), 
+                      config.get('non_parametric_dist_width'),
+                      device=device) 
 
     # Save for tests
     n_test_samples_with_same_shape_code = config['training']['n_test_samples_with_same_shape_code']

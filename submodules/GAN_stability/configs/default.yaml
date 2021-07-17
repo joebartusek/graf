@@ -12,9 +12,6 @@ generator:
 discriminator:
   name: resnet
   kwargs:
-z_dist:
-  type: gauss
-  dim: 256
 training:
   out_dir: output/default
   gan_type: standard
