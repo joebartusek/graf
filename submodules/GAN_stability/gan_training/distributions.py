@@ -1,6 +1,6 @@
 import torch
 from torch import distributions
-import non_parametric_dist
+from non_parametric_dist import ZDist
 
 
 def get_zdist(dist_name, dim, bins=None, width=None, device=None):
@@ -15,7 +15,7 @@ def get_zdist(dist_name, dim, bins=None, width=None, device=None):
         scale = torch.ones(dim, device=device)
         zdist = distributions.Normal(mu, scale)
     elif dist_name == 'non_parametric':
-        zdist = non_parametric_dist.ZDist(dim, bins, width, device=device)
+        zdist = ZDist(dim, bins, width, device=device)
     else:
         raise NotImplementedError
 
