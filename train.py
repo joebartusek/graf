@@ -18,12 +18,12 @@ from graf.config import get_data, build_models, save_config, update_config, buil
 from graf.utils import count_trainable_parameters, get_nsamples
 from graf.transforms import ImgToPatch
 
-from GAN_stability.gan_training import utils
-from GAN_stability.gan_training.train import update_average
-from GAN_stability.gan_training.logger import Logger
-from GAN_stability.gan_training.checkpoints import CheckpointIO
-from GAN_stability.gan_training.distributions import get_ydist, get_zdist
-from GAN_stability.gan_training.config import (
+from submodules.GAN_stability.gan_training import utils
+from submodules.GAN_stability.gan_training.train import update_average
+from submodules.GAN_stability.gan_training.logger import Logger
+from submodules.GAN_stability.gan_training.checkpoints import CheckpointIO
+from submodules.GAN_stability.gan_training.distributions import get_ydist, get_zdist
+from submodules.GAN_stability.gan_training.config import (
     load_config, build_optimizers,
 )
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     parser.add_argument('config', type=str, help='Path to config file.')
 
     args, unknown = parser.parse_known_args() 
-    config = load_config(args.config, 'configs/default.yaml')
+    config = load_config(args.config, '/home/jfb4/SeeingWithSound/code/graf/configs/default.yaml')
     config['data']['fov'] = float(config['data']['fov'])
     config = update_config(config, unknown)
 

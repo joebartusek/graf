@@ -1,0 +1,14 @@
+expname: carla_128
+data:
+  imsize: 128
+  datadir: /tigress/jfb4/graf/data/carla
+  type: carla
+  radius: 10.
+  near: 7.5
+  far: 12.5
+  fov: 30.0
+z_dist:
+  type: non_parametric
+  dim: 256
+non_parametric_dist_bins: 1024
+non_parametric_dist_width: 2
