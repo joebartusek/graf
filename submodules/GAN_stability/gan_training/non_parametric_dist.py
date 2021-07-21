@@ -12,6 +12,11 @@ class ZDist:
         self.width = width
         self.device = device
 
+        if self.width is None:
+            self.width = 4
+        if self.bins is None:
+            self.bins = 1024
+
         mat = sio.loadmat('/home/jfb4/SeeingWithSound/code/giraffe/im2scene/giraffe/models/non_param_pdf.mat')
         self.pdf = torch.from_numpy(np.reshape(mat['X_final'], self.bins))
         self.points = torch.from_numpy(np.linspace(-self.width, self.width, self.bins))
