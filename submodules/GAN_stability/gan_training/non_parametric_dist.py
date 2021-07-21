@@ -18,11 +18,14 @@ class ZDist:
         self.epsilon = self.width * 2 / self.bins
 
     def sample(self, num_codes):
-        num_samples = num_codes[0] * self.dim
+        if len(num_codes) == 1:
+            num_samples = num_codes[0] * self.dim
+        if len(num_codes) == 2:
+            num_samples = num_codes[0] * num_codes[1] * self.dim
         z = self.points[self.pdf.multinomial(num_samples=num_samples, replacement=True)]
         z = z.to(self.device)
         z += torch.rand(num_samples) * self.epsilon
-        z = z.reshape((num_codes[0], self.dim))
+        z = z.reshape((*num_codes, self.dim))
         z = z.type(torch.float32)
         z = z.to(self.device)
 
